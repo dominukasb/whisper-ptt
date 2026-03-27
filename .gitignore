@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.eggs/
+# Whisper model cache (large, no need to commit)
+~/.cache/whisper/
+# Audio temp files
+*.wav
+*.mp3
