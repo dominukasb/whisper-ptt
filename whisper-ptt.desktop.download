@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Whisper PTT
+Comment=Push-to-talk speech to text (local Whisper, offline)
+Exec=whisper-ptt
+Icon=audio-input-microphone
+Terminal=false
+Type=Application
+Categories=Utility;Accessibility;
+Keywords=speech;voice;transcribe;whisper;stt;
+StartupNotify=true
