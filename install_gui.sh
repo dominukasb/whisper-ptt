@@ -12,6 +12,7 @@ sudo pacman -S --needed --noconfirm \
 echo "[2/3] Setting up Python virtualenv…"
 VENV_DIR="$HOME/.venv/whisper-ptt"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+APP_ID="com.dominukasb.whisperptt"
 
 if [ ! -d "$VENV_DIR" ]; then
     # --system-site-packages so PyGObject (GTK bindings) from pacman are visible
@@ -24,14 +25,19 @@ pip install openai-whisper sounddevice numpy scipy pyperclip pynput
 
 echo "[3/3] Writing .desktop launcher…"
 mkdir -p "$HOME/.local/share/applications"
+mkdir -p "$HOME/.local/share/icons/hicolor/scalable/apps"
+
+install -m 0644 \
+    "$SCRIPT_DIR/assets/$APP_ID.svg" \
+    "$HOME/.local/share/icons/hicolor/scalable/apps/$APP_ID.svg"
 
 # Use bash -c with full paths — app launchers don't inherit PATH or venv
-cat > "$HOME/.local/share/applications/whisper-ptt.desktop" << EOF
+cat > "$HOME/.local/share/applications/$APP_ID.desktop" << EOF
 [Desktop Entry]
 Name=Whisper PTT
 Comment=Push-to-talk speech to text (offline)
 Exec=bash -c 'source $VENV_DIR/bin/activate && python $SCRIPT_DIR/whisper_ptt_gui.py'
-Icon=audio-input-microphone
+Icon=$APP_ID
 Terminal=false
 Type=Application
 Categories=Utility;Accessibility;
@@ -39,7 +45,10 @@ Keywords=speech;voice;transcribe;whisper;stt;
 StartupNotify=true
 EOF
 
+rm -f "$HOME/.local/share/applications/whisper-ptt.desktop"
+
 update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
+gtk-update-icon-cache -f -t "$HOME/.local/share/icons/hicolor" 2>/dev/null || true
 
 echo ""
 echo "✅ Done! Find 'Whisper PTT' in your app launcher."

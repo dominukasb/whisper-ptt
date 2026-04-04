@@ -52,6 +52,7 @@ except ImportError as e:
 
 # ─── Configuration ─────────────────────────────────────────────────────────────
 
+APP_ID           = "com.dominukasb.whisperptt"
 PUSH_TO_TALK_KEY = pynput_keyboard.Key.caps_lock
 WHISPER_MODEL    = "base"   # tiny / base / small / medium / large
 SAMPLE_RATE      = 16000
@@ -232,6 +233,8 @@ headerbar { background: transparent; border: none; min-height: 48px; }
 class WhisperPTTWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.set_title("Whisper PTT")
+        self.set_icon_name(APP_ID)
         self.set_default_size(380, 620)
         self.set_resizable(False)
         self._last_text = ""
@@ -430,7 +433,7 @@ class WhisperPTTWindow(Adw.ApplicationWindow):
 
 class WhisperPTTApp(Adw.Application):
     def __init__(self):
-        super().__init__(application_id="com.dominukasb.whisperptt")
+        super().__init__(application_id=APP_ID)
         self._listener = None
         self.connect("activate", self.on_activate)
         self.connect("shutdown", self.on_shutdown)
