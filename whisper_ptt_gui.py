@@ -37,7 +37,7 @@ except Exception as e:
         f.write(f"FATAL: GTK import failed: {e}\n")
     raise
 
-# ── Python packages (pip) ─────────────────────────────────────────────────────
+# ── Python packages (pip) ───────────────────────────────────────────────────
 try:
     import numpy as np
     import sounddevice as sd
