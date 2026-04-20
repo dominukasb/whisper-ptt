@@ -53,7 +53,7 @@ model = None
 lock = threading.Lock()
 
 
-# ─── Audio ────────────────────────────────────────────────────────────────────
+# ─── Audio ────────────────────────────────────────────────────────────────────-
 
 def audio_callback(indata, frames, time_info, status):
     """Called by sounddevice for each audio chunk while recording."""
